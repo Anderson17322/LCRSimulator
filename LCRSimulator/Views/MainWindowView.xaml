@@ -1,0 +1,76 @@
+﻿<Window x:Class="LCRSimulator.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LCRSimulator.Views"
+        mc:Ignorable="d" Name="LCRGameWindow"
+        Title="LCR Game Simulator" Height="380" Width="300" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="{Binding InputDataModel.InputHeader}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <GroupBox Header="{Binding InputDataModel.NumPlayersLabel}">
+                     <TextBox Name="NumberPlayersBox" Height="20" Width="80" Margin="0,5,0,0" >
+                        <Binding Path="InputDataModel.NumberPlayers" TargetNullValue="" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="{Binding InputDataModel.NumGamesLabel}">
+                    <TextBox Name="NumberGamesBox" Height="20" Width="80" Margin="0,5,0,0" >
+                        <Binding Path="InputDataModel.NumberGames" TargetNullValue="" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="{Binding OutputDataModel.OutputLabel}" Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <GroupBox  Header="{Binding OutputDataModel.ShortestLengthGameLabel}">
+                    <TextBlock Height="20" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Text="{Binding OutputDataModel.ShortestLengthGame}"/>
+
+               </GroupBox>
+                <GroupBox Grid.Row="1" Header="{Binding OutputDataModel.LongestLengthGameLabel}">
+                    <TextBlock Height="20" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Text="{Binding OutputDataModel.LongestLengthGame}"/>
+                </GroupBox>
+                <GroupBox Grid.Row="2" Header="{Binding OutputDataModel.AvarageLengthGameLabel}">
+                    <TextBlock Height="20" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Text="{Binding OutputDataModel.AvarageLengthGame}"/>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding RunCommand}" 
+                 CommandParameter="{Binding ElementName=LCRGameWindow}"
+                 Content="{Binding RunButtonLabel}" Width="90" Height="25"/>
+            <Button Grid.Column="1" Command="{Binding CloseCommand}" 
+                 CommandParameter="{Binding ElementName=LCRGameWindow}"
+                 Content="{Binding CloseButtonLabel}" Width="90" Height="25"/>
+        </Grid>
+    </Grid>
+</Window>
